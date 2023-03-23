@@ -12,17 +12,29 @@
 		B676EACA29C93BC000C1D30C /* lab3-3.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "lab3-3.s"; sourceTree = "<group>"; };
 		B676EACB29C93E3600C1D30C /* lab3-4.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "lab3-4.s"; sourceTree = "<group>"; };
 		B676EACC29C93FF900C1D30C /* lab3-5.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "lab3-5.s"; sourceTree = "<group>"; };
+		B6FEBCD129CBA2DD00813AB3 /* lab3-6.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "lab3-6.s"; sourceTree = "<group>"; };
+		B6FEBCD229CC92A300813AB3 /* lab1-1.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "lab1-1.s"; path = "../lab 1/lab1-1.s"; sourceTree = "<group>"; };
+		B6FEBCD329CC92E200813AB3 /* lab1-2.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "lab1-2.s"; path = "../lab 1/lab1-2.s"; sourceTree = "<group>"; };
+		B6FEBCD429CC934800813AB3 /* lab1-3.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "lab1-3.s"; path = "../lab 1/lab1-3.s"; sourceTree = "<group>"; };
+		B6FEBCD529CC966D00813AB3 /* lab1-4.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = "lab1-4.s"; path = "../lab 1/lab1-4.s"; sourceTree = "<group>"; };
+		B6FEBCD629CC96C400813AB3 /* lab1-5 */ = {isa = PBXFileReference; lastKnownFileType = text; name = "lab1-5"; path = "../lab 1/lab1-5"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		B676EAC129C9347600C1D30C = {
 			isa = PBXGroup;
 			children = (
+				B6FEBCD229CC92A300813AB3 /* lab1-1.s */,
+				B6FEBCD329CC92E200813AB3 /* lab1-2.s */,
+				B6FEBCD429CC934800813AB3 /* lab1-3.s */,
+				B6FEBCD529CC966D00813AB3 /* lab1-4.s */,
+				B6FEBCD629CC96C400813AB3 /* lab1-5 */,
 				B676EAC829C9349500C1D30C /* lab3-1.s */,
 				B676EAC929C936F300C1D30C /* lab3-2.s */,
 				B676EACA29C93BC000C1D30C /* lab3-3.s */,
 				B676EACB29C93E3600C1D30C /* lab3-4.s */,
 				B676EACC29C93FF900C1D30C /* lab3-5.s */,
+				B6FEBCD129CBA2DD00813AB3 /* lab3-6.s */,
 			);
 			sourceTree = "<group>";
 		};

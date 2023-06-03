@@ -6,10 +6,29 @@ def converter_int_bin(n):
     binario_12 = binario_string.zfill(12)
     return binario_12
 
-def lui():
+def converter_int_bin_32(n):
+    binario_string = bin(n)[2:]
+    binario_12 = binario_string.zfill(32)
+    return binario_12
 
-    return
+def lui(rd, imm):
+    saida_aux = converter_int_bin_32(imm)
+    saida = ""
+    for i in range(19):
+        saida += saida_aux[i]
+    saida += registradores[rd]
+    saida += "0110111"
+    return saida
 
+def li(rd, imm):
+    if  imm < 2048 and imm >= -2048:
+        saida = addi(rd, "zero", imm)
+    else:
+        imm_aux = converter_int_bin_32(imm)
+        if imm_aux[11] == 1:
+            imm += pow(2,12)
+        saida = lui(rd, imm)
+    return saida
 
 def mul(rd, rs1, rs2):
     saida = "0000001"
@@ -19,7 +38,6 @@ def mul(rd, rs1, rs2):
     saida += registradores[rd]
     saida += "0110011"
     return saida
-
 
 def sw(rs1, rs2, imm):
     saida_aux = converter_int_bin(imm)
@@ -44,8 +62,12 @@ def lw(rd, rs1, imm):
     return saida
 
 
-def beq(rs1, rs2):
-    saida_aux = "1111111111000"
+def beq(rs1, rs2, imm):
+    imm -= 1000
+    imm = str(imm)
+    while len(imm) < 13:
+        imm = "1" + imm
+    saida_aux = imm
     saida = saida_aux[0]
     for i in range(6):
         saida +=  saida_aux[2 + i]
@@ -61,17 +83,29 @@ def beq(rs1, rs2):
 
 
 def ret():
+    #JALR zero, ra, 0
     saida = "000000000000"
     saida += registradores["ra"]
     saida += "000"
     saida += registradores["zero"]
     saida += "1100111"
-    return
+    return saida
 
 
-def call():
+def call(imm):
+    #JAL ra destino com -1000 no destino
+    imm -= 1000
+    saida_aux = converter_int_bin_32(imm)
+    saida = saida_aux[11]
+    for i in range(10):
+        saida += saida_aux[21 + i]
+    saida += saida_aux[20]
+    for i in range(8):
+        saida += saida_aux[12 + i]
+    saida += registradores["ra"]
+    saida += "1101111"
 
-    return
+    return saida
 
 
 def xor(rd, rs1, rs2):
@@ -144,7 +178,6 @@ while True:
     if not entrada:
         print("Programa finalizado!")
         break
-
     if entrada[0] == "addi":
         entrada[1] = entrada[1][:-1]
         entrada[2] = entrada[2][:-1]
@@ -154,11 +187,13 @@ while True:
     elif entrada[0] == "xor":
         saida = xor(entrada[1], entrada[2], entrada[3])
     elif entrada[0] == "call":
-        saida = call()
+        saida = call(int(entrada[1]))
     elif entrada[0] == "ret":
         saida = ret()
     elif entrada[0] == "beq":
-        saida = beq(entrada[1], entrada[2])
+        entrada[1] = entrada[1][:-1]
+        entrada[2] = entrada[2][:-1]
+        saida = beq(entrada[1], entrada[2], int(entrada[3]))
     elif entrada[0] == "lw":
         #ler entrada no tipo x, y(z) com y podendo ser até 99
         entrada[1] = entrada[1][:-1]
@@ -194,7 +229,11 @@ while True:
         entrada[2] = entrada[2][:-1]
         saida = mul(entrada[1], entrada[2], entrada[3])
     elif entrada[0] == "lui":
-        saida = lui()
+        entrada[1] = entrada[1][:-1]
+        saida = lui(entrada[1], int(entrada[2]))
+    elif entrada[0] == "li":
+        entrada[1] = entrada[1][:-1]
+        saida = li(entrada[1], int(entrada[2]))
     else:
         saida = "Não é uma instrução suportada"
     saida = hex(int(saida, 2))
